@@ -11,7 +11,7 @@ var persons = [],
   birthToGive = 25;
 
 var colors = [];
-/* Galactic Tea - http://www.colourlovers.com/palette/1586746/Galactic_Tea*/
+
 colors[2] = [];
 colors[2]['background'] = '#2F294F';
 colors[2][1] = 'rgba(74,49,89,';
@@ -54,7 +54,7 @@ function Firefly(id) {
   this.isHit = false;
   this.stepCounter = 0;
   this.changeDirectionFrequency = getRandomInt(1, 200);
-  this.shape = 2; //getRandomInt(2,3);
+  this.shape = 2; 
   this.shadowBlur = getRandomInt(5, 25);
 }
 
@@ -66,7 +66,7 @@ Firefly.prototype.walk = function() {
   var next_x = this.x + Math.cos(degToRad(this.direction)) * this.speed,
     next_y = this.y + Math.sin(degToRad(this.direction)) * this.speed;
 
-  // Canvas limits
+  
   if (next_x >= (canvas.width - this.width) && (this.direction < 90 || this.direction > 270)) {
     next_x = canvas.width - this.width;
     this.direction = getRandomInt(90, 270, this.direction);
@@ -103,23 +103,23 @@ Firefly.prototype.walk = function() {
 }
 
 Firefly.prototype.takeOppositeDirection = function() {
-  // Right -> Left
+ 
   if ((this.direction >= 0 && this.direction < 90) || (this.direction > 270 && this.direction <= 360)) {
     this.direction = getRandomInt(90, 270);
     return;
   }
-  // Left -> Right
+  
   if (this.direction > 90 && this.direction < 270) {
     var exept = [90, 270];
     this.direction = getRandomInt(0, 360, exept);
     return;
   }
-  // Down -> Up
+ 
   if (this.direction > 0 && this.direction < 180) {
     this.direction = getRandomInt(180, 360);
     return;
   }
-  // Up -> Down
+  
   if (this.direction > 180) {
     this.direction = getRandomInt(0, 180);
   }
@@ -174,14 +174,13 @@ function animate() {
 
   context.beginPath();
 
-  // Création d'une copie de l'array persons
+  
   persons_order = persons.slice(0);
-  // Tri par ordre de position sur l'axe y (afin de gérer les z-index)
+  
   persons_order.sort(function(a, b) {
     return a.y - b.y
   });
 
-  // Paint les instances dans l'ordre trié
   for (var i in persons_order) {
     var u = persons_order[i].id;
     persons[u].walk();
